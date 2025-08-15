@@ -2,12 +2,13 @@ import { notFound } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 import TrackForm from '@/components/TrackForm';
+
 interface Params {
   slug: string;
 }
 
 export default async function CourierDetailPage({ params }: { params: Promise<Params> }) {
-  const { slug } = await params; // ✅ Await params
+  const { slug } = await params;
 
   if (!slug) return notFound();
 
@@ -22,7 +23,11 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
   const { data: allCouriers } = await supabase.from('couriers').select('name, slug');
 
   const otherCouriers = allCouriers?.filter(c => c.slug !== slug) || [];
-  const randomOtherCourier = otherCouriers[0] || null;
+  
+  // Pick a random courier for "Check Also"
+  const randomOtherCourier = otherCouriers.length
+    ? otherCouriers[Math.floor(Math.random() * otherCouriers.length)]
+    : null;
 
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
