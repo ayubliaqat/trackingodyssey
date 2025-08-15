@@ -16,13 +16,12 @@ export default function PopularCouriers() {
 
   useEffect(() => {
     const fetchCouriers = async () => {
-      const { data, error } = await supabase
-        .from("couriers")
-        .select("id, name, slug")
-        .limit(30);
-
+      const { data, error } = await supabase.from("couriers").select("id, name, slug");
       if (!error && data) {
-        setCouriers(data);
+        // Shuffle the array randomly
+        const shuffled = data.sort(() => 0.5 - Math.random());
+        // Pick first 12
+        setCouriers(shuffled.slice(0, 12));
       } else {
         console.error("Failed to fetch couriers", error?.message);
       }
