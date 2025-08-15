@@ -7,13 +7,13 @@ export const metadata: Metadata = {
     "Discover our mission, story, and why users choose Courier Tracker as their go-to shipment tracking platform.",
   robots: "index, follow",
   alternates: {
-    canonical: "https://yourdomain.com/about",
+    canonical: "https://trackingodyssey.com/about",
   },
   openGraph: {
     title: "About Us | Courier Tracker",
     description:
       "Learn why thousands rely on Courier Tracker for accurate, unified parcel tracking.",
-    url: "https://yourdomain.com/about",
+    url: "https://trackingodyssey.com/about",
     siteName: "Courier Tracker",
     locale: "en_US",
     type: "website",

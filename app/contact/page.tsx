@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/ContactForm";
+
 export const metadata: Metadata = {
   title: "Contact Us | Tracking Odyssey",
   description:
@@ -7,6 +8,19 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+  },
+  openGraph: {
+    title: "Contact Us | Tracking Odyssey",
+    description:
+      "Reach out to the Tracking Odyssey team for support, partnerships, or feedback.",
+    url: "https://trackingodyssey.com/contact",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Tracking Odyssey",
+    description:
+      "Reach out to the Tracking Odyssey team for support, partnerships, or feedback.",
   },
 };
 
@@ -27,8 +41,16 @@ export default function ContactPage() {
         </p>
       </header>
 
-      {/* Contact Form */}
-      <ContactForm />
+      {/* Contact Form Section */}
+      <section
+        aria-labelledby="contact-form-heading"
+        className="w-full max-w-lg"
+      >
+        <h2 id="contact-form-heading" className="sr-only">
+          Contact Form
+        </h2>
+        <ContactForm />
+      </section>
     </main>
   );
 }

@@ -23,28 +23,29 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
   const { data: allCouriers } = await supabase.from('couriers').select('name, slug');
 
   const otherCouriers = allCouriers?.filter(c => c.slug !== slug) || [];
-  
-  // Pick a random courier for "Check Also"
   const randomOtherCourier = otherCouriers.length
     ? otherCouriers[Math.floor(Math.random() * otherCouriers.length)]
     : null;
 
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
-      <div className="flex flex-col items-center mb-8 text-center">
+      {/* Page Header */}
+      <header className="flex flex-col items-center mb-8 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold text-[#1e3d59] mb-4">
           {courier.name} Tracking
         </h1>
-      </div>
-
-      <div className="text-center mb-10 px-2 sm:px-0">
-        <p className="text-base sm:text-lg mb-4 text-gray-700">
+        <p className="text-base sm:text-lg text-gray-700">
           Enter your tracking number to find your parcel in real-time.
         </p>
-        <TrackForm slug={courier.slug} />
-      </div>
+      </header>
 
-      <div className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base">
+      {/* Tracking Form Section */}
+      <section aria-labelledby="tracking-form" className="text-center mb-10">
+        <TrackForm slug={courier.slug} />
+      </section>
+
+      {/* Website & Check Also Section */}
+      <section className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base" aria-label="Courier links">
         {courier.website && (
           <p className="mb-2 text-gray-700 break-words">
             <strong>Visit Official Website: </strong>
@@ -67,40 +68,42 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
             </Link>
           </p>
         )}
-      </div>
+      </section>
 
-      <div className="mb-12 overflow-x-auto">
-        <h2 className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59]">
+      {/* Contact Information Table */}
+      <section aria-labelledby="contact-info" className="mb-12 overflow-x-auto">
+        <h2 id="contact-info" className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59]">
           Contact Information
         </h2>
         <table className="min-w-full border border-gray-300 text-sm">
           <tbody>
             <tr className="border-b">
-              <td className="font-medium px-4 py-2 bg-gray-50 whitespace-nowrap">City</td>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">City</th>
               <td className="px-4 py-2">{courier.city || 'N/A'}</td>
             </tr>
             <tr className="border-b">
-              <td className="font-medium px-4 py-2 bg-gray-50 whitespace-nowrap">Address</td>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Address</th>
               <td className="px-4 py-2">{courier.address || 'N/A'}</td>
             </tr>
             <tr className="border-b">
-              <td className="font-medium px-4 py-2 bg-gray-50 whitespace-nowrap">Phone Numbers</td>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Phone Numbers</th>
               <td className="px-4 py-2 break-words">
                 {courier.phone_numbers?.length ? courier.phone_numbers.join(', ') : 'N/A'}
               </td>
             </tr>
             <tr>
-              <td className="font-medium px-4 py-2 bg-gray-50 whitespace-nowrap">Emails</td>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
               <td className="px-4 py-2 break-words">
                 {courier.emails?.length ? courier.emails.join(', ') : 'N/A'}
               </td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </section>
 
-      <div className="pt-8 border-t border-gray-200">
-        <h2 className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center">
+      {/* Other Couriers Links */}
+      <section aria-labelledby="other-couriers" className="pt-8 border-t border-gray-200">
+        <h2 id="other-couriers" className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center">
           Explore Other Couriers
         </h2>
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
@@ -114,7 +117,7 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
             </Link>
           ))}
         </div>
-      </div>
+      </section>
     </main>
   );
 }
