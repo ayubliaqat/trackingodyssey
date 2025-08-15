@@ -14,22 +14,22 @@ export default function SearchBar({
   onSuggestionClick,
 }: Props) {
   return (
-    <div className="w-full space-y-2 relative">
+    <div className="w-full space-y-2 relative shadow-lg rounded-lg p-2 bg-white">
       <input
         type="text"
         placeholder="Enter Courier Name (e.g. DHL)"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500"
+        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 text-sm"
       />
 
       {suggestions.length > 0 && (
-        <ul className="absolute z-10 bg-white dark:bg-gray-800 border border-gray-300 rounded-lg mt-1 w-full max-h-60 overflow-y-auto shadow-md">
+        <ul className="absolute z-10 bg-white dark:bg-gray-800 border border-gray-300 rounded-lg mt-1 w-full max-h-60 overflow-y-auto shadow-lg">
           {suggestions.map((name, index) => (
             <li
               key={index}
               onClick={() => onSuggestionClick(name)}
-              className="px-4 py-2 hover:bg-orange-100 dark:hover:bg-gray-700 cursor-pointer"
+              className="px-4 py-2 hover:bg-orange-100 dark:hover:bg-gray-700 cursor-pointer text-sm"
             >
               {name}
             </li>

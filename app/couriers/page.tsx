@@ -38,7 +38,7 @@ export default function CouriersPage() {
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen">
       <h1 className="text-3xl sm:text-4xl font-bold mb-4 text-center text-[#1e3d59]">
-        All Couriers Here
+        All Couriers <span className='text-orange-400'>Here....!</span>
       </h1>
 
       <p className="text-center text-gray-600 mb-8 max-w-2xl mx-auto text-sm sm:text-base">
@@ -77,7 +77,7 @@ export default function CouriersPage() {
               <Link href={`/couriers/${courier.slug}`} className="w-full">
                 <button
                   className="w-full py-2 rounded-full text-white text-sm font-medium"
-                  style={{ backgroundColor: '#ff6e40' }}
+                  style={{ backgroundColor: '#ff8f26ff' }}
                 >
                   Track Now
                 </button>

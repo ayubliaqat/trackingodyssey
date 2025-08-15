@@ -6,14 +6,23 @@ import { format } from "date-fns";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
-  searchParams?: Promise<{ tracking_number?: string; name?: string }>;
+  searchParams?: Promise<{ number?: string }>;
 };
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params; // ✅ Await params
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
   if (!slug) return {};
-  const { data } = await supabase.from("couriers").select("name").eq("slug", slug).single();
+  const { data } = await supabase
+    .from("couriers")
+    .select("name")
+    .eq("slug", slug)
+    .single();
+
   if (!data) return {};
   return {
     title: `Tracking Results - ${data.name}`,
@@ -25,17 +34,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export async function generateStaticParams() {
   const { data } = await supabase.from("couriers").select("slug");
   if (!data) return [];
-  return data.map(c => ({ slug: c.slug }));
+  return data.map((c) => ({ slug: c.slug }));
 }
 
 export default async function ResultPage({ params, searchParams }: PageProps) {
-  const { slug } = await params; // ✅ Await params
-  const { tracking_number, name } = (await searchParams) || {}; // ✅ Await searchParams
+  const { slug } = await params;
+  const { number } = (await searchParams) || {};
 
-  const trackingNumber = tracking_number ?? "N/A";
-  const _userName = name ?? "N/A";
+  const trackingNumber = number ?? "N/A";
 
-  const { data, error } = await supabase.from("couriers").select("*").eq("slug", slug).single();
+  const { data, error } = await supabase
+    .from("couriers")
+    .select("*")
+    .eq("slug", slug)
+    .single();
   if (error || !data) notFound();
 
   const courier: Courier = data;
@@ -44,19 +56,19 @@ export default async function ResultPage({ params, searchParams }: PageProps) {
   return (
     <main className="min-h-screen px-4 sm:px-6 lg:px-8 py-12 bg-white text-[#1e3d59]">
       <h1 className="text-3xl sm:text-4xl font-bold text-center mb-10">
-        Tracking Results 🙂
+        Tracking Results <span className='text-orange-400'>..... </span>🙂
       </h1>
 
-      <section className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-[#ff6e40]">
+      <section className="max-w-2xl mx-auto bg-white rounded-2xl shadow-xl p-6 sm:p-8 border-2 border-orange-400">
         <p className="text-lg font-bold mb-6">
           Ooops, Something went wrong.{" "}
           <a
             href={courier.website}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline hover:text-[#ff5722] transition"
+            className="underline hover:text-orange-500 transition"
           >
-            <span className="text-[#ff6e40]">Visit Official Website</span>
+            <span className="text-orange-400">Visit Official Website</span>
           </a>
         </p>
 
@@ -75,12 +87,6 @@ export default async function ResultPage({ params, searchParams }: PageProps) {
                 </td>
                 <td className="px-4 py-3">{trackingNumber}</td>
               </tr>
-              <tr className="border-b border-gray-300">
-                <td className="bg-gray-50 font-semibold px-4 py-3 border-r border-gray-300">
-                  User Name:
-                </td>
-                <td className="px-4 py-3">{_userName}</td>
-              </tr>
               <tr>
                 <td className="bg-gray-50 font-semibold px-4 py-3 border-r border-gray-300">
                   Checked At:
@@ -95,7 +101,7 @@ export default async function ResultPage({ params, searchParams }: PageProps) {
       <div className="text-center mt-8">
         <Link
           href={`/couriers/${slug}`}
-          className="inline-block px-6 py-3 bg-[#ff6e40] text-white font-semibold rounded-full hover:bg-[#ff5722] transition"
+          className="inline-block px-6 py-3 bg-orange-400 text-white font-semibold rounded-full hover:bg-orange-500 transition"
         >
           ← Go Back to {courier.name}
         </Link>

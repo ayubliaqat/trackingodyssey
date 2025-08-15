@@ -40,38 +40,41 @@ export default function PopularCouriers() {
       <div className="container mx-auto px-4">
         <h2
           id="popular-couriers-heading"
-          className="text-3xl font-bold mb-8 text-center text-gray-900"
+          className="text-3xl font-bold mb-8 text-center text-[#1e3d59]"
         >
-          Popular Couriers
+          Popular <span className="text-orange-400">Couriers..!</span>
         </h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {couriers.map((courier) => (
-            <div
+            <article
               key={courier.id}
               className="flex flex-col justify-between items-center border rounded-xl px-4 py-6 shadow-sm hover:shadow-md transition bg-white"
+              aria-labelledby={`courier-title-${courier.id}`}
             >
-              {/* Courier Name */}
-              <h3 className="text-center text-base font-semibold text-gray-800 mb-6">
+              <h3
+                id={`courier-title-${courier.id}`}
+                className="text-center text-base sm:text-lg font-semibold text-gray-800 mb-6"
+              >
                 {courier.name}
               </h3>
 
-              {/* Track Button */}
               <Link
                 href={`/couriers/${courier.slug}`}
                 className="flex items-center gap-1 text-sm font-medium text-orange-600 hover:text-orange-700 transition"
-                aria-label={`Track ${courier.name}`}
+                aria-label={`Track shipment with ${courier.name}`}
               >
-                Track <ArrowRight className="w-4 h-4" />
+                Track <ArrowRight className="w-4 h-4" aria-hidden="true" />
               </Link>
-            </div>
+            </article>
           ))}
         </div>
 
         <div className="text-center mt-10">
           <Link
             href="/couriers"
-            className="inline-block px-6 py-3 text-white bg-orange-500 hover:bg-orange-600 rounded-lg text-sm font-semibold transition"
+            className="inline-block px-6 py-3 text-white bg-orange-500 hover:bg-orange-600 rounded-full text-sm font-semibold transition"
+            aria-label="View all available couriers"
           >
             View All Couriers
           </Link>

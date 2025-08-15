@@ -66,8 +66,8 @@ export default function Hero() {
   };
 
   return (
-    <section className="w-full py-10 md:py-16 px-4 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10">
+    <section className="w-full pt-6 md:pt-8 px-4 bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-6 md:gap-8">
         
         {/* Left Section */}
         <div className="w-full md:w-1/2 space-y-6 text-center md:text-left">
@@ -80,7 +80,7 @@ export default function Hero() {
             Fast. Simple. Courier Tracking Made Easy, Just a Click Away.
           </p>
 
-          <div className="bg-white dark:bg-gray-800 shadow-xl p-6 rounded-2xl w-full max-w-xl mx-auto md:mx-0">
+          <div className="bg-white dark:bg-gray-800 shadow-lg p-6 rounded-2xl w-full max-w-xl mx-auto md:mx-0">
             <SearchBar
               query={query}
               setQuery={setQuery}
@@ -113,7 +113,7 @@ export default function Hero() {
             alt="Courier and package delivery illustration"
             width={500}
             height={500}
-            className="object-contain w-full max-w-[320px] md:max-w-[500px] h-auto"
+            className="object-contain w-full max-w-[320px] md:max-w-[480px] h-auto"
             loading="lazy"
           />
         </div>
