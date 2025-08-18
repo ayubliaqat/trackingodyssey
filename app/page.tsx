@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Home — TrackingSite",
     description: "Track parcels from many couriers. Fast SSR pages for SEO.",
-    images: ["https://yourdomain.com/og-image.jpg"],
+    images: ["https://trackingodyssey.com/og-image.jpg"],
   },
 };
 

@@ -3,4 +3,4 @@ Disallow: /noindex/
 Disallow: /admin/
 Allow: /
 
-Sitemap: https://yourdomain.com/sitemap.xml
+Sitemap: https://trackingodyssey.com/sitemap.xml
