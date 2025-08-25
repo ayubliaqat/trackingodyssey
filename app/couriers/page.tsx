@@ -1,39 +1,41 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import { supabase } from '@/lib/supabase'
-import Link from 'next/link'
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+import Link from "next/link";
 
 interface Courier {
-  name: string
-  slug: string
+  name: string;
+  slug: string;
 }
 
 export default function CouriersPage() {
-  const [couriers, setCouriers] = useState<Courier[]>([])
-  const [searchTerm, setSearchTerm] = useState('')
-  const [error, setError] = useState<string | null>(null)
+  const [couriers, setCouriers] = useState<Courier[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch couriers from Supabase
   useEffect(() => {
     const fetchCouriers = async () => {
-      const { data, error } = await supabase.from('couriers').select('name, slug')
+      const { data, error } = await supabase
+        .from("couriers")
+        .select("name, slug");
 
       if (error) {
-        console.error('Error fetching couriers:', error.message)
-        setError('Failed to load couriers.')
+        console.error("Error fetching couriers:", error.message);
+        setError("Failed to load couriers.");
       } else {
-        setCouriers(data ?? [])
+        setCouriers(data ?? []);
       }
-    }
+    };
 
-    fetchCouriers()
-  }, [])
+    fetchCouriers();
+  }, []);
 
   // Filtered list based on search input
   const filteredCouriers = couriers.filter((courier) =>
     courier.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  );
 
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen">
@@ -47,7 +49,10 @@ export default function CouriersPage() {
       </header>
 
       {/* Search Bar */}
-      <section aria-label="Search Couriers" className="mb-10 max-w-md mx-auto px-2">
+      <section
+        aria-label="Search Couriers"
+        className="mb-10 max-w-md mx-auto px-2"
+      >
         <label htmlFor="courier-search" className="sr-only">
           Search courier
         </label>
@@ -63,40 +68,47 @@ export default function CouriersPage() {
 
       {/* Error Message */}
       {error && (
-        <div className="text-red-500 text-center mb-6 text-sm sm:text-base" role="alert">
+        <div
+          className="text-red-500 text-center mb-6 text-sm sm:text-base"
+          role="alert"
+        >
           {error}
         </div>
       )}
 
       {/* Courier Cards */}
-      <section aria-label="List of Couriers" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
-        {filteredCouriers.length > 0 ? (
-          filteredCouriers.map((courier) => (
-            <article
-              key={courier.slug}
-              className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-md transition p-4 flex flex-col items-center text-center"
-            >
-              <h2 className="text-sm font-semibold mb-3 text-[#1e3d59] break-words">
-                {courier.name}
-              </h2>
-              <Link href={`/couriers/${courier.slug}`} aria-label={`Track ${courier.name}`}>
-                <button
-                  className="w-full py-2 rounded-full text-white text-sm font-medium"
-                  style={{ backgroundColor: '#ff8f26ff' }}
+      <section
+        aria-label="List of Couriers"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
+      >
+        {filteredCouriers.length > 0
+          ? filteredCouriers.map((courier) => (
+              <article
+                key={courier.slug}
+                className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-md transition p-4 flex flex-col items-center text-center"
+              >
+                <h2 className="text-sm font-semibold mb-3 text-[#1e3d59] break-words">
+                  {courier.name}
+                </h2>
+                <Link
+                  href={`/couriers/${courier.slug}`}
+                  aria-label={`Track ${courier.name}`}
                 >
-                  Track Now
-                </button>
-              </Link>
-            </article>
-          ))
-        ) : (
-          !error && (
-            <div className="col-span-full text-center text-gray-500 text-sm">
-              No couriers found.
-            </div>
-          )
-        )}
+                  <button
+                    className="w-full px-3 py-2 rounded-full text-white text-sm font-medium hover:bg-orange-500 transition-colors"
+                    style={{ backgroundColor: "#ff8f26ff" }}
+                  >
+                    Track Now
+                  </button>
+                </Link>
+              </article>
+            ))
+          : !error && (
+              <div className="col-span-full text-center text-gray-500 text-sm">
+                No couriers found.
+              </div>
+            )}
       </section>
     </main>
-  )
+  );
 }
