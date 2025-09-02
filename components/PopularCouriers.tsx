@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { supabase } from "@/lib/supabase";
-import { ArrowRight } from "lucide-react";
 
 type Courier = {
   id: number;
@@ -16,9 +15,12 @@ export default function PopularCouriers() {
 
   useEffect(() => {
     const fetchCouriers = async () => {
-      const { data, error } = await supabase.from("couriers").select("id, name, slug");
+      const { data, error } = await supabase
+        .from("couriers")
+        .select("id, name, slug");
+
       if (!error && data) {
-        // Shuffle the array randomly
+        // Shuffle randomly
         const shuffled = data.sort(() => 0.5 - Math.random());
         // Pick first 12
         setCouriers(shuffled.slice(0, 12));
@@ -48,23 +50,21 @@ export default function PopularCouriers() {
           {couriers.map((courier) => (
             <article
               key={courier.id}
-              className="flex flex-col justify-between items-center border rounded-xl px-4 py-6 shadow-sm hover:shadow-md transition bg-white"
+              className="flex flex-col justify-center items-center border rounded-xl px-4 py-6 shadow-sm hover:shadow-md transition bg-white"
               aria-labelledby={`courier-title-${courier.id}`}
             >
               <h3
                 id={`courier-title-${courier.id}`}
-                className="text-center text-base sm:text-lg font-semibold text-gray-800 mb-6"
+                className="text-center text-base sm:text-lg font-semibold text-gray-800"
               >
-                {courier.name}
+                <Link
+                  href={`/couriers/${courier.slug}`}
+                  className="text-orange-600 hover:text-orange-700 transition"
+                  aria-label={`Track shipment with ${courier.name}`}
+                >
+                  Track {courier.name}
+                </Link>
               </h3>
-
-              <Link
-                href={`/couriers/${courier.slug}`}
-                className="flex items-center gap-1 text-sm font-medium text-orange-600 hover:text-orange-700 transition"
-                aria-label={`Track shipment with ${courier.name}`}
-              >
-                Track <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </Link>
             </article>
           ))}
         </div>

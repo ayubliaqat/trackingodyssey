@@ -42,33 +42,6 @@ export default function Footer() {
           </ul>
         </nav>
 
-        {/* Contact Info */}
-        <div className="text-left lg:px-6 lg:border-r border-gray-200">
-          <h3 className="text-xl font-semibold text-orange-400 mb-5">Contact Us</h3>
-          <address className="not-italic text-sm leading-relaxed space-y-3 text-[#1e3d59]/80">
-            <p>
-              <span className="font-medium">Email:</span>{" "}
-              <a
-                href="mailto:support@trackingodyssey.com"
-                aria-label="Email support at Tracking Odyssey"
-                className="text-blue-600 hover:text-[#ff6e40] transition"
-              >
-                support@trackingodyssey.com
-              </a>
-            </p>
-            <p>
-              <span className="font-medium">Phone:</span>{" "}
-              <a
-                href="tel:+1234567890"
-                aria-label="Call Tracking Odyssey support"
-                className="text-blue-600 hover:text-[#ff6e40] transition"
-              >
-                +1 (234) 567-890
-              </a>
-            </p>
-            <p>Karachi, Pakistan</p>
-          </address>
-        </div>
 
         {/* Legal */}
         <nav className="text-left lg:pl-6" aria-label="Legal Navigation">
