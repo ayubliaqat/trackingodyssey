@@ -7,6 +7,9 @@ import Footer from "../components/Footer";
 export const metadata = {
   title: "Tracking Website",
   description: "Fast parcel tracking — SSR, SEO friendly",
+  verification: {
+    google: "DSPLfwjkugjj2E1MK0FP0XxIeSyhX58mZ-odCVrVO_I", // ✅ GSC verification code
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
