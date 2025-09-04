@@ -1,31 +1,70 @@
-import { notFound } from 'next/navigation';
-import { supabase } from '@/lib/supabase';
-import Link from 'next/link';
-import TrackForm from '@/components/TrackForm';
+import { notFound } from "next/navigation";
+import { supabase } from "@/lib/supabase";
+import Link from "next/link";
+import TrackForm from "@/components/TrackForm";
 
-interface Params {
-  slug: string;
+// ✅ keep params async
+interface PageProps {
+  params: Promise<{ slug: string }>;
 }
 
-export default async function CourierDetailPage({ params }: { params: Promise<Params> }) {
-  const { slug } = await params;
+// 👇 Pre-generate all courier pages for SEO + static rendering
+export async function generateStaticParams() {
+  const { data: couriers } = await supabase.from("couriers").select("slug");
+
+  return (
+    couriers?.map((courier) => ({
+      slug: courier.slug,
+    })) ?? []
+  );
+}
+
+// ✅ enable ISR
+export const revalidate = 60;
+
+// 👇 Dynamic metadata for SEO
+export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params; // ✅ must await in your setup
+
+  const { data: courier } = await supabase
+    .from("couriers")
+    .select("name")
+    .eq("slug", slug)
+    .single();
+
+  if (!courier) {
+    return {
+      title: "Courier Not Found - Parcel Tracking",
+      description: "This courier does not exist in our tracking system.",
+    };
+  }
+
+  return {
+    title: `${courier.name} Tracking - Real-Time Parcel Updates`,
+    description: `Track your ${courier.name} shipment in real-time. Enter your tracking number to get the latest delivery updates instantly.`,
+  };
+}
+
+export default async function CourierDetailPage({ params }: PageProps) {
+  const { slug } = await params; // ✅ must await in your setup
 
   if (!slug) return notFound();
 
   const { data: courier, error } = await supabase
-    .from('couriers')
-    .select('*')
-    .eq('slug', slug)
+    .from("couriers")
+    .select("*")
+    .eq("slug", slug)
     .single();
 
   if (error || !courier) return notFound();
 
-  const { data: allCouriers } = await supabase.from('couriers').select('name, slug');
+  const { data: allCouriers } = await supabase.from("couriers").select("name, slug");
 
-  const otherCouriers = allCouriers?.filter(c => c.slug !== slug) || [];
-  const randomOtherCourier = otherCouriers.length
-    ? otherCouriers[Math.floor(Math.random() * otherCouriers.length)]
-    : null;
+  const otherCouriers = allCouriers?.filter((c) => c.slug !== slug) || [];
+  const randomOtherCourier =
+    otherCouriers.length > 0
+      ? otherCouriers[Math.floor(Math.random() * otherCouriers.length)]
+      : null;
 
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
@@ -45,7 +84,10 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
       </section>
 
       {/* Website & Check Also Section */}
-      <section className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base" aria-label="Courier links">
+      <section
+        className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base"
+        aria-label="Courier links"
+      >
         {courier.website && (
           <p className="mb-2 text-gray-700 break-words">
             <strong>Visit Official Website: </strong>
@@ -63,7 +105,10 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
         {randomOtherCourier && (
           <p className="text-gray-700">
             <strong>Check Also: </strong>
-            <Link href={`/couriers/${randomOtherCourier.slug}`} className="text-blue-600 underline">
+            <Link
+              href={`/couriers/${randomOtherCourier.slug}`}
+              className="text-blue-600 underline"
+            >
               {randomOtherCourier.name}
             </Link>
           </p>
@@ -72,29 +117,42 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
 
       {/* Contact Information Table */}
       <section aria-labelledby="contact-info" className="mb-12 overflow-x-auto">
-        <h2 id="contact-info" className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59]">
+        <h2
+          id="contact-info"
+          className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59]"
+        >
           Contact Information
         </h2>
         <table className="min-w-full border border-gray-300 text-sm">
           <tbody>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">City</th>
-              <td className="px-4 py-2">{courier.city || 'N/A'}</td>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">
+                City
+              </th>
+              <td className="px-4 py-2">{courier.city || "N/A"}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Address</th>
-              <td className="px-4 py-2">{courier.address || 'N/A'}</td>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">
+                Address
+              </th>
+              <td className="px-4 py-2">{courier.address || "N/A"}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Phone Numbers</th>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">
+                Phone Numbers
+              </th>
               <td className="px-4 py-2 break-words">
-                {courier.phone_numbers?.length ? courier.phone_numbers.join(', ') : 'N/A'}
+                {courier.phone_numbers?.length
+                  ? courier.phone_numbers.join(", ")
+                  : "N/A"}
               </td>
             </tr>
             <tr>
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
+              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">
+                Emails
+              </th>
               <td className="px-4 py-2 break-words">
-                {courier.emails?.length ? courier.emails.join(', ') : 'N/A'}
+                {courier.emails?.length ? courier.emails.join(", ") : "N/A"}
               </td>
             </tr>
           </tbody>
@@ -102,12 +160,18 @@ export default async function CourierDetailPage({ params }: { params: Promise<Pa
       </section>
 
       {/* Other Couriers Links */}
-      <section aria-labelledby="other-couriers" className="pt-8 border-t border-gray-200">
-        <h2 id="other-couriers" className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center">
+      <section
+        aria-labelledby="other-couriers"
+        className="pt-8 border-t border-gray-200"
+      >
+        <h2
+          id="other-couriers"
+          className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
+        >
           Explore Other Couriers
         </h2>
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {allCouriers?.map(c => (
+          {allCouriers?.map((c) => (
             <Link
               key={c.slug}
               href={`/couriers/${c.slug}`}

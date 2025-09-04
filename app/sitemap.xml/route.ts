@@ -7,46 +7,50 @@ export async function GET() {
 
   // 1️⃣ Static pages
   const staticPages = ["", "about", "contact", "track", "couriers"];
-  const staticUrls = staticPages.map(
-    (slug) => `
-  <url>
-    <loc>${baseUrl}/${slug}</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>`
-  );
+  const staticUrls = staticPages
+    .map(
+      (slug) => `
+    <url>
+      <loc>${baseUrl}/${slug}</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.8</priority>
+    </url>`
+    )
+    .join("\n");
 
-  // 2️⃣ Fetch dynamic courier slugs from Supabase
-  const { data: couriers, error } = await supabase.from("couriers").select("slug");
+  // 2️⃣ Dynamic pages (couriers)
+  const { data: couriers, error } = await supabase
+    .from("couriers")
+    .select("slug");
 
   if (error) {
-    console.error("Error fetching couriers for sitemap:", error.message);
+    console.error("❌ Error fetching couriers for sitemap:", error.message);
   }
 
   const dynamicUrls =
-    couriers?.map(
-      (c) => `
-  <url>
-    <loc>${baseUrl}/couriers/${encodeURIComponent(c.slug)}</loc>
-    <changefreq>daily</changefreq>
-    <priority>0.7</priority>
-  </url>`
-    ) || [];
+    couriers
+      ?.map(
+        (c) => `
+    <url>
+      <loc>${baseUrl}/couriers/${encodeURIComponent(c.slug)}</loc>
+      <changefreq>daily</changefreq>
+      <priority>0.7</priority>
+    </url>`
+      )
+      .join("\n") || "";
 
-  // 3️⃣ Combine all URLs
-  const urls = [...staticUrls, ...dynamicUrls].join("\n");
-
-  // 4️⃣ Build XML
+  // 3️⃣ Final XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls}
-</urlset>`;
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${staticUrls}
+  ${dynamicUrls}
+  </urlset>`;
 
-  // 5️⃣ Return XML response
+  // 4️⃣ Response
   return new NextResponse(xml, {
     headers: {
       "Content-Type": "application/xml",
-      "Cache-Control": "s-maxage=3600, stale-while-revalidate=59", // cache for performance
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate=59",
     },
   });
 }
