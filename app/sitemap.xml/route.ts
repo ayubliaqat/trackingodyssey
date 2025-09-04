@@ -1,6 +1,7 @@
 // app/sitemap.xml/route.ts
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import fs from "fs";
+import path from "path";
 
 export async function GET() {
   const baseUrl = "https://trackingodyssey.com";
@@ -18,26 +19,23 @@ export async function GET() {
     )
     .join("\n");
 
-  // 2️⃣ Dynamic pages (couriers)
-  const { data: couriers, error } = await supabase
-    .from("couriers")
-    .select("slug");
+  // 2️⃣ Dynamic courier pages from app/couriers folder
+  const couriersDir = path.join(process.cwd(), "app", "couriers");
+  const courierFolders = fs
+    .readdirSync(couriersDir, { withFileTypes: true })
+    .filter((d) => d.isDirectory())
+    .map((d) => d.name);
 
-  if (error) {
-    console.error("❌ Error fetching couriers for sitemap:", error.message);
-  }
-
-  const dynamicUrls =
-    couriers
-      ?.map(
-        (c) => `
+  const dynamicUrls = courierFolders
+    .map(
+      (slug) => `
     <url>
-      <loc>${baseUrl}/couriers/${encodeURIComponent(c.slug)}</loc>
+      <loc>${baseUrl}/couriers/${encodeURIComponent(slug)}</loc>
       <changefreq>daily</changefreq>
       <priority>0.7</priority>
     </url>`
-      )
-      .join("\n") || "";
+    )
+    .join("\n");
 
   // 3️⃣ Final XML
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
