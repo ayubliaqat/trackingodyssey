@@ -1,0 +1,89 @@
+import Link from "next/link";
+import fs from "fs";
+import path from "path";
+
+interface Courier {
+  name: string;
+  slug: string;
+}
+
+export const revalidate = 60; // ISR: revalidate every 60 seconds
+
+export default function CouriersPage() {
+  // 🔹 Get all courier folders dynamically
+  const couriersDir = path.join(process.cwd(), "app", "couriers");
+  let couriers: Courier[] = [];
+
+  try {
+    const folders = fs
+      .readdirSync(couriersDir, { withFileTypes: true })
+      .filter((d) => d.isDirectory() && d.name !== "index"); // exclude index
+
+    couriers = folders.map((d) => ({
+      slug: d.name,
+      name: d.name
+        .replace(/-/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase()),
+    }));
+  } catch (err) {
+    console.error("Error reading courier folders:", err);
+  }
+
+  return (
+    <main className="px-4 sm:px-6 py-10 bg-white min-h-screen">
+      {/* Header */}
+      <header className="text-center mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-[#1e3d59]">
+          All Couriers <span className="text-orange-400">Here....!</span>
+        </h1>
+        <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
+          Explore a wide range of courier partners. Click any to start tracking.
+        </p>
+      </header>
+
+      {/* Search Bar */}
+      <section aria-label="Search Couriers" className="mb-10 max-w-md mx-auto px-2">
+        <label htmlFor="courier-search" className="sr-only">
+          Search courier
+        </label>
+        <input
+          id="courier-search"
+          type="text"
+          placeholder="Search courier..."
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ffc13b] text-sm sm:text-base"
+        />
+      </section>
+
+      {/* Courier Cards */}
+      <section
+        aria-label="List of Couriers"
+        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
+      >
+        {couriers.length > 0 ? (
+          couriers.map((courier) => (
+            <article
+              key={courier.slug}
+              className="bg-white border border-gray-200 rounded-xl shadow hover:shadow-md transition p-4 flex flex-col items-center text-center"
+            >
+              <h2 className="text-sm font-semibold mb-3 text-[#1e3d59] break-words">
+                {courier.name}
+              </h2>
+              <Link href={`/couriers/${courier.slug}`} aria-label={`Track ${courier.name}`}>
+                <button
+                  className="w-full px-3 py-2 rounded-full text-white text-sm font-medium hover:bg-orange-500 transition-colors"
+                  style={{ backgroundColor: "#ff8f26ff" }}
+                >
+                  Track Now
+                </button>
+              </Link>
+            </article>
+          ))
+        ) : (
+          <div className="col-span-full text-center text-gray-500 text-sm">
+            No couriers found.
+          </div>
+        )}
+      </section>
+    </main>
+  );
+}

@@ -45,7 +45,7 @@ export default function Header() {
         </nav>
 
         {/* Desktop CTA Button */}
-        <Link href="/couriers" className="hidden md:block">
+        <Link href="/couriers/all" className="hidden md:block">
           <button className="bg-orange-400 text-white px-5 py-2.5 rounded-full hover:opacity-90 transition duration-200 text-sm font-medium">
             All Couriers
           </button>

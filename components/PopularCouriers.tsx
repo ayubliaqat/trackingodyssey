@@ -71,7 +71,7 @@ export default function PopularCouriers() {
 
         <div className="text-center mt-10">
           <Link
-            href="/couriers"
+            href="/couriers/all"
             className="inline-block px-6 py-3 text-white bg-orange-500 hover:bg-orange-600 rounded-full text-sm font-semibold transition"
             aria-label="View all available couriers"
           >
