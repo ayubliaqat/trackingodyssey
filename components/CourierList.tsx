@@ -1,40 +1,46 @@
-// app/components/CourierList.tsx
 "use client";
 
 import { useState } from "react";
 import Link from "next/link";
+import couriersData from "@/app/data/couriers.json";
 
 interface Courier {
   name: string;
   slug: string;
 }
 
-interface Props {
-  couriers: Courier[];
-}
+export default function CouriersList() {
+  const [searchTerm, setSearchTerm] = useState("");
 
-export default function CourierList({ couriers }: Props) {
-  const [query, setQuery] = useState("");
-
-  // Filter couriers based on search
-  const filteredCouriers = couriers.filter((c) =>
-    c.name.toLowerCase().includes(query.toLowerCase())
+  const filteredCouriers = couriersData.filter((courier: Courier) =>
+    courier.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <>
-      {/* Search Bar */}
+    <main className="px-4 sm:px-6 py-10 bg-white min-h-screen">
+      <header className="text-center mb-8">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2 text-[#1e3d59]">
+          All Couriers <span className="text-orange-400">Here....!</span>
+        </h1>
+        <p className="text-gray-600 text-sm sm:text-base max-w-2xl mx-auto">
+          Explore a wide range of courier partners. Click any to start tracking.
+        </p>
+      </header>
+
       <section aria-label="Search Couriers" className="mb-10 max-w-md mx-auto px-2">
+        <label htmlFor="courier-search" className="sr-only">
+          Search courier
+        </label>
         <input
+          id="courier-search"
           type="text"
           placeholder="Search courier..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#ffc13b] text-sm sm:text-base"
         />
       </section>
 
-      {/* Courier Cards */}
       <section
         aria-label="List of Couriers"
         className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6"
@@ -64,6 +70,6 @@ export default function CourierList({ couriers }: Props) {
           </div>
         )}
       </section>
-    </>
+    </main>
   );
 }
