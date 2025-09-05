@@ -1,10 +1,20 @@
 // app/components/PopularCouriers.tsx
 import Link from "next/link";
-import { getAllCouriers, type Courier } from "@/lib/getCouriers";
+import couriersData from "@/app/data/couriers.json";
 
-export default async function PopularCouriers() {
-  // Get all couriers and pick first 12 (or shuffle if you want)
-  const allCouriers: Courier[] = getAllCouriers("all");
+interface Courier {
+  name: string;
+  slug: string;
+  website?: string;
+  city?: string;
+  address?: string;
+  phone_numbers?: string[];
+  emails?: string[];
+}
+
+export default function PopularCouriers() {
+  // Get all couriers from JSON and pick first 12
+  const allCouriers: Courier[] = couriersData;
   const couriers = allCouriers.slice(0, 12); // pick first 12
 
   return (

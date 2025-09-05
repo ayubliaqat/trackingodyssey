@@ -3,7 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import { getAllCouriers } from "@/lib/getCouriers";
+import couriersData from "@/app/data/couriers.json";;
 
 // 🔹 Static courier data
 const courier = {
@@ -34,8 +34,8 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-// 🔹 Get all couriers server-side, exclude current page
-const otherCouriers = getAllCouriers(courier.slug);
+// 🔹 Get all other couriers from JSON excluding current
+const otherCouriers = couriersData.filter((c) => c.slug !== courier.slug);
 
 // 🔹 JSON-LD structured data
 const structuredData = {
@@ -81,30 +81,29 @@ export default function AirTanzaniaPage() {
 
       {/* Official Website */}
       <section className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base" aria-label="Courier links">
-  {courier.website && (
-    <p className="mb-2 text-gray-700 break-words">
-      <strong>Visit Official Website: </strong>
-      <a
-        href={courier.website}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-600 underline"
-      >
-        {courier.website}
-      </a>
-    </p>
-  )}
+        {courier.website && (
+          <p className="mb-2 text-gray-700 break-words">
+            <strong>Visit Official Website: </strong>
+            <a
+              href={courier.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline"
+            >
+              {courier.website}
+            </a>
+          </p>
+        )}
 
-  <p className="text-gray-700">
-    <strong>Check Also: </strong>
-    <span className="mr-2">
-      <Link href="/couriers/kd-courier-tracking" className="text-blue-600 underline">
-        KD Courier
-      </Link>
-    </span>
-  
-  </p>
-</section>
+        <p className="text-gray-700">
+          <strong>Check Also: </strong>
+          <span className="mr-2">
+            <Link href="/couriers/kd-courier-tracking" className="text-blue-600 underline">
+              KD Courier
+            </Link>
+          </span>
+        </p>
+      </section>
 
       {/* Contact Table */}
       <section aria-labelledby="contact-info" className="mb-12 overflow-x-auto">
