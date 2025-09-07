@@ -1,253 +1,516 @@
 [
   {
+    "id": 1,
     "name": "Peachmode Order Delivery",
-    "slug": "peachmode-order-tracking"
+    "slug": "peachmode-order-tracking",
+    "path": "/couriers/peachmode-order-tracking"
   },
   {
+    "id": 2,
     "name": "KargoKart Parcel Service",
-    "slug": "kargokart-parcel-tracking"
+    "slug": "kargokart-parcel-tracking",
+    "path": "/couriers/kargokart-parcel-tracking"
   },
   {
+    "id": 3,
     "name": "Sanchar Couriers",
-    "slug": "sanchar-couriers-tracking"
+    "slug": "sanchar-couriers-tracking",
+    "path": "/couriers/sanchar-couriers-tracking"
   },
   {
+    "id": 4,
     "name": "Shree Mahabali Courier Express",
-    "slug": "shree-mahabali-tracking"
+    "slug": "shree-mahabali-tracking",
+    "path": "/couriers/shree-mahabali-tracking"
   },
   {
+    "id": 5,
     "name": "Bagai Golden Transport",
-    "slug": "bagai-golden-transport-tracking"
+    "slug": "bagai-golden-transport-tracking",
+    "path": "/couriers/bagai-golden-transport-tracking"
   },
   {
+    "id": 6,
     "name": "Anand Bus",
-    "slug": "anand-bus-tracking"
+    "slug": "anand-bus-tracking",
+    "path": "/couriers/anand-bus-tracking"
   },
-   {
+  {
+    "id": 7,
     "name": "IKEA Order Delivery",
-    "slug": "ikea-order-tracking"
+    "slug": "ikea-order-tracking",
+    "path": "/"
   },
   {
+    "id": 8,
     "name": "NATBRO Logistics Service",
-    "slug": "natbro-tracking"
+    "slug": "natbro-tracking",
+    "path": "/couriers/natbro-tracking"
   },
   {
+    "id": 9,
     "name": "ShopOnCliQ Order Online",
-    "slug": "shoponcliq-order-tracking"
+    "slug": "shoponcliq-order-tracking",
+    "path": "/couriers/shoponcliq-order-tracking"
   },
+
   {
+    "id": 10,
     "name": "Banggood Order Delivery Tracking",
-    "slug": "banggood-order-delivery-tracking"
+    "slug": "banggood-order-delivery-tracking",
+    "path": "/couriers/banggood-order-delivery-tracking"
   },
   {
+    "id": 11,
     "name": "Naranji Peraj Transport",
-    "slug": "naranji-peraj-transport-tracking"
+    "slug": "naranji-peraj-transport-tracking",
+    "path": "/couriers/naranji-peraj-transport-tracking"
   },
   {
+    "id": 12,
     "name": "GMS Worldwide Courier",
-    "slug": "gms-courier-tracking"
+    "slug": "gms-courier-tracking",
+    "path": "/couriers/gms-courier-tracking"
   },
   {
+    "id": 13,
     "name": "Star Door To Door Courier",
-    "slug": "star-door-to-door-tracking"
+    "slug": "star-door-to-door-tracking",
+    "path": "/couriers/star-door-to-door-tracking"
   },
   {
+    "id": 14,
     "name": "Nippon Express Group",
-    "slug": "nippon-express-tracking"
+    "slug": "nippon-express-tracking",
+    "path": "/couriers/nippon-express-tracking"
   },
   {
+    "id": 15,
     "name": "Sri Renganathan Motor Service",
-    "slug": "sri-renganathan-service-tracking"
+    "slug": "sri-renganathan-service-tracking",
+    "path": "/couriers/sri-renganathan-service-tracking"
   },
   {
+    "id": 16,
     "name": "DTDC Courier",
-    "slug": "dtdc-tracking"
+    "slug": "dtdc-tracking",
+    "path": "/couriers/dtdc-tracking"
   },
   {
+    "id": 17,
     "name": "Intracity Couriers Logistics",
-    "slug": "intracity-logistics-tracking"
+    "slug": "intracity-logistics-tracking",
+    "path": "/couriers/intracity-logistics-tracking"
   },
   {
+    "id": 18,
     "name": "Pitney Bowes Shipping",
-    "slug": "pitney-bowes-tracking"
+    "slug": "pitney-bowes-tracking",
+    "path": "/couriers/pitney-bowes-tracking"
   },
   {
+    "id": 19,
     "name": "AMWAY Order Delivery Tracking",
-    "slug": "amway-order-tracking"
+    "slug": "amway-order-tracking",
+    "path": "/couriers/amway-order-tracking"
   },
   {
+    "id": 20,
     "name": "M5C Logistics Solution Tracking",
-    "slug": "m5c-logistics-tracking"
+    "slug": "m5c-logistics-tracking",
+    "path": "/couriers/m5c-logistics-tracking"
   },
   {
+    "id": 21,
     "name": "Falcon Bus Online",
-    "slug": "falcon-bus-tracking"
+    "slug": "falcon-bus-tracking",
+    "path": "/couriers/alcon-bus-tracking"
   },
   {
+    "id": 22,
     "name": "Swiss Freight Cargo",
-    "slug": "swiss-cargo-tracking"
+    "slug": "swiss-cargo-tracking",
+    "path": "/couriers/wiss-cargo-tracking"
   },
   {
+    "id": 23,
     "name": "Ecom Express",
-    "slug": "ecomexpress-tracking"
+    "slug": "ecomexpress-tracking",
+    "path": "/couriers/ecomexpress-tracking"
   },
   {
+    "id": 24,
     "name": "Swire Shipping Group",
-    "slug": "swire-shipping-tracking"
+    "slug": "swire-shipping-tracking",
+    "path": "/couriers/swire-shipping-tracking"
   },
   {
+    "id": 25,
     "name": "Neelgiri Courier Delivery",
-    "slug": "neelgiri-tracking"
+    "slug": "neelgiri-tracking",
+    "path": "/couriers/Neelgiri Courier Delivery"
   },
   {
+    "id": 26,
     "name": "PD Express Logistics",
-    "slug": "pd-express-logistics-tracking"
+    "slug": "pd-express-logistics-tracking",
+    "path": "/couriers/pd-express-logistics-tracking"
   },
-   {
+  {
+    "id": 27,
     "name": "Bright Parcel Courier",
-    "slug": "bright-parcel-tracking"
+    "slug": "bright-parcel-tracking",
+    "path": "/couriers/bright-parcel-tracking"
   },
   {
+    "id": 28,
     "name": "Seth Shipping Container",
-    "slug": "seth-shipping-tracking"
+    "slug": "seth-shipping-tracking",
+    "path": "/couriers/seth-shipping-tracking"
   },
   {
+    "id": 29,
     "name": "Sarveshwar Container Transport",
-    "slug": "sarveshwar-container-tracking"
+    "slug": "sarveshwar-container-tracking",
+    "path": "/couriers/sarveshwar-container-tracking"
   },
   {
+    "id": 30,
     "name": "Fastway Worldwide Express",
-    "slug": "fastway-express-tracking"
+    "slug": "fastway-express-tracking",
+    "path": "/couriers/fastway-express-tracking"
   },
   {
+    "id": 31,
     "name": "Weeple Logistics Courier",
-    "slug": "weeple-tracking"
+    "slug": "weeple-tracking",
+    "path": "/couriers/weeple-tracking"
   },
   {
+    "id": 32,
     "name": "Shipmentlink Courier Transport",
-    "slug": "shipmentlink-courier-tracking"
+    "slug": "shipmentlink-courier-tracking",
+    "path": "/couriers/shipmentlink-courier-tracking"
   },
   {
+    "id": 33,
     "name": "Holisol Logistics",
-    "slug": "holisol-tracking"
+    "slug": "holisol-tracking",
+    "path": "/couriers/holisol-tracking"
   },
   {
+    "id": 34,
     "name": "Scorpion Express Courier",
-    "slug": "scorpion-express-tracking"
+    "slug": "scorpion-express-tracking",
+    "path": "/couriers/scorpion-express-tracking"
   },
-   {
+  {
+    "id": 35,
     "name": "Overseas Express Logistics",
-    "slug": "overseas-logistics-tracking"
+    "slug": "overseas-logistics-tracking",
+    "path": "/couriers/overseas-logistics-tracking"
   },
   {
+    "id": 36,
     "name": "iThink Logistics Courier",
-    "slug": "ithink-logistics-tracking"
+    "slug": "ithink-logistics-tracking",
+    "path": "/couriers/ithink-logistics-tracking"
   },
   {
+    "id": 37,
     "name": "Avakaaya Courier Shipment",
-    "slug": "avakaaya-courier-tracking"
+    "slug": "avakaaya-courier-tracking",
+    "path": "/couriers/avakaaya-courier-tracking"
   },
   {
+    "id": 38,
     "name": "FedEx India",
-    "slug": "fedex-tracking"
+    "slug": "fedex-tracking",
+    "path": "/couriers/fedex-tracking"
   },
+
   {
+    "id": 39,
     "name": "Frontline Courier Cargo",
-    "slug": "frontline-cargo-tracking"
+    "slug": "frontline-cargo-tracking",
+    "path": "/couriers/frontline-cargo-tracking"
   },
   {
+    "id": 40,
     "name": "Grand Speed Network",
-    "slug": "grand-speed-tracking"
+    "slug": "grand-speed-tracking",
+    "path": "/couriers/grand-speed-tracking"
   },
   {
+    "id": 41,
     "name": "Ennore Cargo Container Terminal",
-    "slug": "ennore-cargo-tracking"
+    "slug": "ennore-cargo-tracking",
+    "path": "/couriers/ennore-cargo-tracking"
   },
   {
+    "id": 42,
     "name": "Arco Roadways Transport",
-    "slug": "arco-roadways-transport-tracking"
-  },{
+    "slug": "arco-roadways-transport-tracking",
+    "path": "/couriers/arco-roadways-transport-tracking"
+  },
+  {
+    "id": 43,
     "name": "Janvi Logistics Transport Tracking",
-    "slug": "janvi-logistics-tracking"
+    "slug": "janvi-logistics-tracking",
+    "path": "/couriers/janvi-logistics-tracking"
   },
   {
+    "id": 44,
     "name": "Pioneer Express Logistics",
-    "slug": "pioneer-express-logistics-tracking"
+    "slug": "pioneer-express-logistics-tracking",
+    "path": "/couriers/pioneer-express-logistics-tracking"
   },
   {
+    "id": 45,
     "name": "Emaklum Courier Transport",
-    "slug": "emaklum-courier-tracking"
+    "slug": "emaklum-courier-tracking",
+    "path": "/couriers/emaklum-courier-tracking"
   },
   {
+    "id": 46,
     "name": "Sampark Global Logistics",
-    "slug": "sampark-logistics-tracking"
+    "slug": "sampark-logistics-tracking",
+    "path": "/couriers/sampark-logistics-tracking"
   },
   {
+    "id": 47,
     "name": "Yes First To 5G",
-    "slug": "yes-first-to-5g-tracking"
+    "slug": "yes-first-to-5g-tracking",
+    "path": "/couriers/yes-first-to-5g-tracking"
   },
   {
+    "id": 48,
     "name": "Safexpress Courier Transport",
-    "slug": "safexpress-tracking"
+    "slug": "safexpress-tracking",
+    "path": "/couriers/safexpress-tracking"
   },
   {
+    "id": 49,
     "name": "UDX Worldwide Transport",
-    "slug": "udx-transport-tracking"
+    "slug": "udx-transport-tracking",
+    "path": "/couriers/udx-transport-tracking"
   },
-   {
+  {
+    "id": 50,
     "name": "Shree Tirupati Courier",
-    "slug": "shree-tirupati-courier-tracking"
+    "slug": "shree-tirupati-courier-tracking",
+    "path": "/couriers/shree-tirupati-courier-tracking"
   },
   {
+    "id": 51,
     "name": "Oak Harbor Freight Line",
-    "slug": "oak-harbor-freight-tracking"
+    "slug": "oak-harbor-freight-tracking",
+    "path": "/couriers/oak-harbor-freight-tracking"
   },
   {
+    "id": 52,
     "name": "First Flight Courier",
-    "slug": "first-flight-courier-tracking"
+    "slug": "first-flight-courier-tracking",
+    "path": "/couriers/first-flight-courier-tracking"
   },
   {
+    "id": 53,
     "name": "Airways Courier Delivery Tracking",
-    "slug": "airways-courier-tracking"
+    "slug": "airways-courier-tracking",
+    "path": "/couriers/airways-courier-tracking"
   },
   {
+    "id": 54,
     "name": "KD Courier",
-    "slug": "kd-courier-tracking"
+    "slug": "kd-courier-tracking",
+    "path": "/couriers/kd-courier-tracking"
   },
   {
+    "id": 55,
     "name": "Air Tanzania Cargo",
-    "slug": "air-tanzania-tracking"
+    "slug": "air-tanzania-tracking",
+    "path": "/couriers/air-tanzania-tracking"
   },
   {
+    "id": 56,
     "name": "CJ Logistics Korea",
-    "slug": "cj-logistics-tracking"
+    "slug": "cj-logistics-tracking",
+    "path": "/couriers/cj-logistics-tracking"
   },
   {
+    "id": 57,
     "name": "Mahindra Logistics Courier",
-    "slug": "mahindra-tracking"
+    "slug": "mahindra-tracking",
+    "path": "/couriers/mahindra-tracking"
   },
   {
+    "id": 58,
     "name": "Sagawa Express Courier",
-    "slug": "sagawa-courier-tracking"
+    "slug": "sagawa-courier-tracking",
+    "path": "/couriers/sagawa-courier-tracking"
   },
   {
+    "id": 59,
     "name": "Kuehne Nagel Malaysia Courier",
-    "slug": "kuehne-nagel-malaysia-tracking"
+    "slug": "kuehne-nagel-malaysia-tracking",
+    "path": "/couriers/kuehne-nagel-malaysia-tracking"
   },
-   {
+  {
+    "id": 60,
     "name": "BlueDart Express",
-    "slug": "bluedart-tracking"
+    "slug": "bluedart-tracking",
+    "path": "/couriers/bluedart-tracking"
   },
   {
+    "id": 61,
     "name": "Jai Maharashtra Cargo Movers",
-    "slug": "jai-maharashtra-tracking"
+    "slug": "jai-maharashtra-tracking",
+    "path": "/couriers/jai-maharashtra-tracking"
   },
   {
+    "id": 62,
     "name": "Nexus One Courier",
-    "slug": "nexus-one-tracking"
+    "slug": "nexus-one-tracking",
+    "path": "/couriers/nexus-one-tracking"
   },
   {
+    "id": 63,
     "name": "MSPDCL Bill Online Check Status",
-    "slug": "mspdcl-tracking"
+    "slug": "mspdcl-tracking",
+    "path": "/couriers/mspdcl-tracking"
+  },
+  {
+    "id": 64,
+    "name": "ABest Freight Logistics Cargo",
+    "slug": "abest-express-courier",
+    "website": "https://www.abestexpress.com/",
+    "path": "/abest-express-courier"
+  },
+  {
+    "id": 65,
+    "name": "Air Canada Order Shipment",
+    "slug": "air-canada-cargo",
+    "website": "https://www.aircanada.com/",
+    "path": "/air-canada-cargo"
+  },
+
+  {
+    "id": 66,
+    "name": "Airspeed Cargo Courier",
+    "slug": "airspeed-cargo-courier",
+    "website": "https://airspeed.ph/",
+    "path": "/airspeed-cargo-courier"
+  },
+  {
+    "id": 67,
+    "name": "Baraka Express Order Shipment",
+    "slug": "baraka-express-indonesia",
+    "website": "https://barakaexpress.co.id/",
+    "path": "/baraka-express-indonesia"
+  },
+  {
+    "id": 68,
+    "name": "ClickPost Courier Shipment",
+    "slug": "click-post-courier",
+    "website": "https://www.clickpost.ai/",
+    "path": "/click-post-courier"
+  },
+  {
+    "id": 69,
+    "name": "FGV Transport Courier",
+    "slug": "fgv-transport",
+    "website": "https://www.fgvtransport.com/",
+    "path": "/fgv-transport"
+  },
+  {
+    "id": 70,
+    "name": "Garuda Indonesia Cargo",
+    "slug": "garuda-indonesia-cargo",
+    "website": "https://cargo.garuda-indonesia.com/",
+    "path": "/garuda-indonesia-cargo"
+  },
+  {
+    "id": 71,
+    "name": "Jal Cargo Shipment",
+    "slug": "jal-cargo-flight",
+    "website": "https://www.jal.co.jp/",
+    "path": "/jal-cargo-flight"
+  },
+  {
+    "id": 72,
+    "name": "KGP Express Courier",
+    "slug": "kgp-express-courier",
+    "website": "http://kgpdev.co.id/",
+    "path": "/kgp-express-courier"
+  },
+  {
+    "id": 73,
+    "name": "Lalamove Courier Delivery",
+    "slug": "lalamove-delivery",
+    "website": "https://www.lalamove.com/ms-my/",
+    "path": "/lalamove-delivery"
+  },
+  {
+    "id": 74,
+    "name": "Maxser Global Parcel Delivery",
+    "slug": "maxser-courier",
+    "website": "https://maxser.in/",
+    "path": "/maxser-courier"
+  },
+  {
+    "id": 75,
+    "name": "Mex Barlian Cargo Shipment",
+    "slug": "mex-barlian-shipping",
+    "website": "https://mexbarlian.com/",
+    "path": "/mex-barlian-shipping"
+  },
+  {
+    "id": 76,
+    "name": "Post2U Courier Delivery",
+    "slug": "post2u-courier",
+    "website": "https://www.post2u.com.my/index.htm",
+    "path": "/post2u-courier"
+  },
+  {
+    "id": 77,
+    "name": "Sinokor Courier",
+    "slug": "sinokor-container",
+    "website": "http://www.sinokor.co.kr/en/index.html",
+    "path": "/sinokor-container"
+  },
+  {
+    "id": 78,
+    "name": "Valmo Courier Shipment",
+    "slug": "valmo-courier",
+    "website": "https://www.valmo.in/",
+    "path": "/valmo-courier"
+  },
+  {
+    "id": 79,
+    "name": "VIP Express Order shipment",
+    "slug": "vip-express-courier",
+    "website": "https://vipexpressww.com/",
+    "path": "/vip-express-courier"
+  },
+  {
+    "id": 80,
+    "name": "ANA Cargo Shipment",
+    "slug": "ana-cargo-flight",
+    "website": "https://www.anacargo.jp/",
+    "path": "/ana-cargo-flight"
+  },
+  {
+    "id": 81,
+    "name": "World Ocean Logistics",
+    "slug": "world-ocean-logistics",
+    "website": "https://worldocean.com.my/",
+    "path": "/world-ocean-logistics"
+  },
+  {
+    "id": 82,
+    "name": "Japan Post Parcel Shipment",
+    "slug": "japan-post-office",
+    "website": "https://www.post.japanpost.jp/index_en.html",
+    "path": "/japan-post-office"
   }
 ]

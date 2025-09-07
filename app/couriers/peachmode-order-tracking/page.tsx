@@ -3,10 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import couriersData from "@/app/data/couriers.json";
-
+import ExploreCouriers from "@/components/ExploreCouriers";
 const courier = {
   slug: "peachmode-order-tracking",
   name: "Peachmode Order Delivery",
@@ -43,22 +40,6 @@ const structuredData = {
   ],
 };
 
-// 🔹 Get other couriers dynamically
-const couriersDir = path.join(process.cwd(), "app", "couriers");
-let otherCouriers: { slug: string; name: string }[] = [];
-
-try {
-  const folders = fs.readdirSync(couriersDir, { withFileTypes: true }).filter((d) => d.isDirectory());
-  otherCouriers = folders
-    .map((d) => ({
-      slug: d.name,
-      name: d.name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-    }))
-    .filter((c) => c.slug !== courier.slug); // exclude current courier
-} catch (err) {
-  console.error(err);
-}
-
 export default function PeachmodePage() {
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
@@ -66,6 +47,7 @@ export default function PeachmodePage() {
         {JSON.stringify(structuredData)}
       </Script>
 
+      {/* Header */}
       <header className="flex flex-col items-center mb-8 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold text-[#1e3d59] mb-4">{courier.name} Tracking</h1>
         <p className="text-base sm:text-lg text-gray-700 mb-8">
@@ -73,11 +55,13 @@ export default function PeachmodePage() {
         </p>
       </header>
 
+      {/* Tracking Form */}
       <section aria-labelledby="tracking-form" className="text-center mb-10 mt-4">
         <h2 id="tracking-form" className="sr-only">Track Your Parcel</h2>
         <TrackForm slug={courier.slug} />
       </section>
 
+      {/* Official Website & Check Also */}
       <section className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base" aria-label="Courier links">
         {courier.website && (
           <p className="mb-2 text-gray-700 break-words">
@@ -89,12 +73,13 @@ export default function PeachmodePage() {
         )}
         <p className="text-gray-700">
           <strong>Check Also: </strong>
-          <span>
-            <Link href="/couriers/m5c-logistics-tracking" className="text-blue-600 underline">M5C Logistics Solution</Link>
-          </span>
+          <Link href="/couriers/m5c-logistics-tracking" className="text-blue-600 underline">
+            M5C Logistics Solution
+          </Link>
         </p>
       </section>
 
+      {/* Contact Table */}
       <section aria-labelledby="contact-info" className="mb-12 overflow-x-auto">
         <h2 id="contact-info" className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59]">Contact Information</h2>
         <table className="min-w-full border border-gray-300 text-sm">
@@ -119,29 +104,8 @@ export default function PeachmodePage() {
         </table>
       </section>
 
-  {/* Explore All Couriers */}
-<section aria-labelledby="all-couriers" className="pt-8 border-t border-gray-200">
-  <h2
-    id="all-couriers"
-    className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
-  >
-    Explore All Couriers
-  </h2>
-  <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-    {couriersData
-      .filter((c) => c.slug !== courier.slug) // exclude current courier
-      .map((c) => (
-        <Link
-          key={c.slug}
-          href={`/couriers/${c.slug}`}
-          className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition text-center"
-        >
-          {c.name}
-        </Link>
-      ))}
-  </div>
-</section>
-
+      {/* Explore All Couriers */}
+      <ExploreCouriers currentSlug={courier.slug} />
     </main>
   );
 }

@@ -3,10 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import couriersData from "@/app/data/couriers.json";
-
+import ExploreCouriers from "@/components/ExploreCouriers";
 // 🔹 Static data
 const courier = {
   slug: "shoponcliq-order-tracking",
@@ -23,7 +20,9 @@ const courier = {
 export const metadata: Metadata = {
   title: `${courier.name} Tracking - Real-Time Parcel Updates`,
   description: `Track your ShopOnCliQ orders easily with real-time updates on your package status.`,
-  alternates: { canonical: `https://trackingodyssey.com/couriers/${courier.slug}` },
+  alternates: {
+    canonical: `https://trackingodyssey.com/couriers/${courier.slug}`,
+  },
   openGraph: {
     title: `${courier.name} Tracking`,
     description: `Check your parcel status online with ${courier.name} in New Delhi, India.`,
@@ -34,19 +33,6 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 60;
-
-// 🔹 Read all couriers dynamically for "Explore Other Couriers"
-const couriersDir = path.join(process.cwd(), "app", "couriers");
-let otherCouriers: { slug: string; name: string }[] = [];
-
-try {
-  const folders = fs.readdirSync(couriersDir, { withFileTypes: true }).filter((d) => d.isDirectory());
-  otherCouriers = folders
-    .map((d) => ({ slug: d.name, name: d.name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) }))
-    .filter((c) => c.slug !== courier.slug); // exclude current
-} catch (err) {
-  console.error(err);
-}
 
 // 🔹 JSON-LD structured data
 const structuredData = {
@@ -76,7 +62,9 @@ export default function ShopOnCliQPage() {
 
       {/* Header */}
       <header className="flex flex-col items-center mb-8 text-center">
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#1e3d59] mb-4">{courier.name} Tracking</h1>
+        <h1 className="text-3xl sm:text-4xl font-bold text-[#1e3d59] mb-4">
+          {courier.name} Tracking
+        </h1>
         <p className="text-base sm:text-lg text-gray-700">
           Enter your tracking number to check your order status online.
         </p>
@@ -84,16 +72,26 @@ export default function ShopOnCliQPage() {
 
       {/* Tracking Form */}
       <section aria-labelledby="tracking-form" className="text-center mb-10">
-        <h2 id="tracking-form" className="sr-only">Track Your Parcel</h2>
+        <h2 id="tracking-form" className="sr-only">
+          Track Your Parcel
+        </h2>
         <TrackForm slug={courier.slug} />
       </section>
 
       {/* Official Website & Check Also */}
-      <section className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base" aria-label="Courier links">
+      <section
+        className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base"
+        aria-label="Courier links"
+      >
         {courier.website && (
           <p className="mb-2 text-gray-700 break-words">
             <strong>Visit Official Website: </strong>
-            <a href={courier.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
+            <a
+              href={courier.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline"
+            >
               {courier.website}
             </a>
           </p>
@@ -101,59 +99,72 @@ export default function ShopOnCliQPage() {
         <p className="text-gray-700">
           <strong>Check Also: </strong>
           <span className="mr-2">
-            <Link href="/couriers/natbro-tracking" className="text-blue-600 underline">NATBRO Logistics Service</Link>
+            <Link
+              href="/couriers/natbro-tracking"
+              className="text-blue-600 underline"
+            >
+              NATBRO Logistics Service
+            </Link>
           </span>
         </p>
       </section>
 
       {/* Contact Table */}
       <section aria-labelledby="contact-info" className="mb-12 overflow-x-auto">
-        <h2 id="contact-info" className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59]">Contact Information</h2>
+        <h2
+          id="contact-info"
+          className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59]"
+        >
+          Contact Information
+        </h2>
         <table className="min-w-full border border-gray-300 text-sm">
           <tbody>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">City</th>
+              <th
+                scope="row"
+                className="font-medium px-4 py-2 bg-gray-50 text-left"
+              >
+                City
+              </th>
               <td className="px-4 py-2">{courier.city}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Address</th>
+              <th
+                scope="row"
+                className="font-medium px-4 py-2 bg-gray-50 text-left"
+              >
+                Address
+              </th>
               <td className="px-4 py-2">{courier.address}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Phone Numbers</th>
-              <td className="px-4 py-2 break-words">{courier.phone_numbers.join(", ")}</td>
+              <th
+                scope="row"
+                className="font-medium px-4 py-2 bg-gray-50 text-left"
+              >
+                Phone Numbers
+              </th>
+              <td className="px-4 py-2 break-words">
+                {courier.phone_numbers.join(", ")}
+              </td>
             </tr>
             <tr>
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
-              <td className="px-4 py-2 break-words">{courier.emails.join(", ")}</td>
+              <th
+                scope="row"
+                className="font-medium px-4 py-2 bg-gray-50 text-left"
+              >
+                Emails
+              </th>
+              <td className="px-4 py-2 break-words">
+                {courier.emails.join(", ")}
+              </td>
             </tr>
           </tbody>
         </table>
       </section>
 
       {/* Explore All Couriers */}
-<section aria-labelledby="all-couriers" className="pt-8 border-t border-gray-200">
-  <h2
-    id="all-couriers"
-    className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
-  >
-    Explore All Couriers
-  </h2>
-  <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-    {couriersData
-      .filter((c) => c.slug !== courier.slug) // exclude current courier
-      .map((c) => (
-        <Link
-          key={c.slug}
-          href={`/couriers/${c.slug}`}
-          className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition text-center"
-        >
-          {c.name}
-        </Link>
-      ))}
-  </div>
-</section>
-
+      <ExploreCouriers currentSlug={courier.slug} />
     </main>
   );
 }

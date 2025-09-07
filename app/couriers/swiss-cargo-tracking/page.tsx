@@ -3,11 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import couriersData from "@/app/data/couriers.json";
-
-// 🔹 Static data
+import ExploreCouriers from "@/components/ExploreCouriers";
 const courier = {
   slug: "swiss-cargo-tracking",
   name: "Swiss Freight Cargo",
@@ -16,10 +12,9 @@ const courier = {
   address: "Unit 7, The Metro Centre, St. Johns Road, Isleworth, Middlesex, England, TW7 6NJ",
   phone_numbers: ["+44 020-884-883-33"],
   emails: ["info@swissfreight.co.uk"],
-  logo: "", // optional
+  logo: "",
 };
 
-// 🔹 Metadata (general)
 export const metadata: Metadata = {
   title: `${courier.name} Tracking - Real-Time Parcel Updates`,
   description: `Track your shipment with ${courier.name}. Get instant delivery updates for your parcels online.`,
@@ -35,20 +30,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-// 🔹 Read all couriers dynamically for "Explore Other Couriers"
-const couriersDir = path.join(process.cwd(), "app", "couriers");
-let otherCouriers: { slug: string; name: string }[] = [];
-
-try {
-  const folders = fs.readdirSync(couriersDir, { withFileTypes: true }).filter((d) => d.isDirectory());
-  otherCouriers = folders
-    .map((d) => ({ slug: d.name, name: d.name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) }))
-    .filter((c) => c.slug !== courier.slug); // exclude current
-} catch (err) {
-  console.error(err);
-}
-
-// 🔹 JSON-LD structured data
+// JSON-LD structured data
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -66,13 +48,12 @@ const structuredData = {
   ],
 };
 
+// Other couriers
+
 export default function SwissCargoTrackingPage() {
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
-      {/* JSON-LD */}
-      <Script id="json-ld" type="application/ld+json">
-        {JSON.stringify(structuredData)}
-      </Script>
+      <Script id="json-ld" type="application/ld+json">{JSON.stringify(structuredData)}</Script>
 
       {/* Header */}
       <header className="flex flex-col items-center mb-8 text-center">
@@ -89,22 +70,16 @@ export default function SwissCargoTrackingPage() {
       </section>
 
       {/* Official Website & Check Also */}
-      <section className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base" aria-label="Courier links">
+      <section className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base">
         {courier.website && (
           <p className="mb-2 text-gray-700 break-words">
             <strong>Visit Official Website: </strong>
-            <a href={courier.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
-              {courier.website}
-            </a>
+            <a href={courier.website} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">{courier.website}</a>
           </p>
         )}
         <p className="text-gray-700">
           <strong>Check Also: </strong>
-          <span className="mr-2">
-            <Link href="/couriers/falcon-bus-tracking" className="text-blue-600 underline">
-              Falcon Bus Online
-            </Link>
-          </span>
+          <Link href="/couriers/falcon-bus-tracking" className="text-blue-600 underline">Falcon Bus Online</Link>
         </p>
       </section>
 
@@ -114,48 +89,27 @@ export default function SwissCargoTrackingPage() {
         <table className="min-w-full border border-gray-300 text-sm">
           <tbody>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">City</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">City</th>
               <td className="px-4 py-2">{courier.city}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Address</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">Address</th>
               <td className="px-4 py-2">{courier.address}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Phone Numbers</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">Phone Numbers</th>
               <td className="px-4 py-2 break-words">{courier.phone_numbers.join(", ")}</td>
             </tr>
             <tr>
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
               <td className="px-4 py-2 break-words">{courier.emails.join(", ")}</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-   {/* Explore All Couriers */}
-<section aria-labelledby="all-couriers" className="pt-8 border-t border-gray-200">
-  <h2
-    id="all-couriers"
-    className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
-  >
-    Explore All Couriers
-  </h2>
-  <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-    {couriersData
-      .filter((c) => c.slug !== courier.slug) // exclude current courier
-      .map((c) => (
-        <Link
-          key={c.slug}
-          href={`/couriers/${c.slug}`}
-          className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition text-center"
-        >
-          {c.name}
-        </Link>
-      ))}
-  </div>
-</section>
-
+      {/* Explore All Couriers */}
+     <ExploreCouriers currentSlug={courier.slug} />
     </main>
   );
 }

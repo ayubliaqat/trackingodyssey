@@ -3,9 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import fs from "fs";
-import couriersData from "@/app/data/couriers.json";
-import path from "path";
+import ExploreCouriers from "@/components/ExploreCouriers";
 
 const courier = {
   slug: "amway-order-tracking",
@@ -42,22 +40,6 @@ const structuredData = {
     },
   ],
 };
-
-// 🔹 Explore other couriers dynamically
-const couriersDir = path.join(process.cwd(), "app", "couriers");
-let otherCouriers: { slug: string; name: string }[] = [];
-
-try {
-  const folders = fs.readdirSync(couriersDir, { withFileTypes: true }).filter((d) => d.isDirectory());
-  otherCouriers = folders
-    .map((d) => ({
-      slug: d.name,
-      name: d.name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()),
-    }))
-    .filter((c) => c.slug !== courier.slug);
-} catch (err) {
-  console.error(err);
-}
 
 export default function AmwayPage() {
   return (
@@ -120,28 +102,7 @@ export default function AmwayPage() {
       </section>
 
       {/* Explore All Couriers */}
-<section aria-labelledby="all-couriers" className="pt-8 border-t border-gray-200">
-  <h2
-    id="all-couriers"
-    className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
-  >
-    Explore All Couriers
-  </h2>
-  <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-    {couriersData
-      .filter((c) => c.slug !== courier.slug) // exclude current courier
-      .map((c) => (
-        <Link
-          key={c.slug}
-          href={`/couriers/${c.slug}`}
-          className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition text-center"
-        >
-          {c.name}
-        </Link>
-      ))}
-  </div>
-</section>
-
+      <ExploreCouriers currentSlug={courier.slug} />
     </main>
   );
 }

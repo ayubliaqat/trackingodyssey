@@ -31,7 +31,6 @@ export default function Footer() {
               { label: "Home", href: "/" },
               { label: "About Us", href: "/about" },
               { label: "Contact", href: "/contact" },
-              { label: "Courier Partners", href: "/couriers" },
             ].map(({ label, href }) => (
               <li key={href}>
                 <Link href={href} className="hover:text-[#ff6e40] transition duration-200">

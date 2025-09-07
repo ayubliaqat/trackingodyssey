@@ -3,11 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import couriersData from "@/app/data/couriers.json";
-
-// 🔹 Static data
+import ExploreCouriers from "@/components/ExploreCouriers";
 const courier = {
   slug: "star-door-to-door-tracking",
   name: "Star Door To Door Courier",
@@ -19,7 +15,6 @@ const courier = {
   logo: "",
 };
 
-// 🔹 Metadata
 export const metadata: Metadata = {
   title: `${courier.name} Tracking - Real-Time Parcel Updates`,
   description: `Track your shipment with ${courier.name}. Get instant delivery updates for your parcels online.`,
@@ -35,20 +30,7 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-// 🔹 Read all couriers dynamically for "Explore Other Couriers"
-const couriersDir = path.join(process.cwd(), "app", "couriers");
-let otherCouriers: { slug: string; name: string }[] = [];
-
-try {
-  const folders = fs.readdirSync(couriersDir, { withFileTypes: true }).filter((d) => d.isDirectory());
-  otherCouriers = folders
-    .map((d) => ({ slug: d.name, name: d.name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) }))
-    .filter((c) => c.slug !== courier.slug);
-} catch (err) {
-  console.error(err);
-}
-
-// 🔹 JSON-LD structured data
+// JSON-LD structured data
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -66,9 +48,13 @@ const structuredData = {
   ],
 };
 
+// Other couriers from JSON excluding current
+
+
 export default function StarDoorCourierPage() {
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
+      {/* JSON-LD */}
       <Script id="json-ld" type="application/ld+json">
         {JSON.stringify(structuredData)}
       </Script>
@@ -99,11 +85,9 @@ export default function StarDoorCourierPage() {
         )}
         <p className="text-gray-700">
           <strong>Check Also: </strong>
-          <span className="mr-2">
-            <Link href="/couriers/gms-courier-tracking" className="text-blue-600 underline">
-              GMS Worldwide Courier
-            </Link>
-          </span>
+          <Link href="/couriers/gms-courier-tracking" className="text-blue-600 underline">
+            GMS Worldwide Courier
+          </Link>
         </p>
       </section>
 
@@ -126,35 +110,14 @@ export default function StarDoorCourierPage() {
             </tr>
             <tr>
               <th className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
-              <td className="px-4 py-2 break-words">{courier.emails.length > 0 ? courier.emails.join(", ") : "N/A"}</td>
+              <td className="px-4 py-2 break-words">{courier.emails.length ? courier.emails.join(", ") : "N/A"}</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-     {/* Explore All Couriers */}
-<section aria-labelledby="all-couriers" className="pt-8 border-t border-gray-200">
-  <h2
-    id="all-couriers"
-    className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
-  >
-    Explore All Couriers
-  </h2>
-  <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-    {couriersData
-      .filter((c) => c.slug !== courier.slug) // exclude current courier
-      .map((c) => (
-        <Link
-          key={c.slug}
-          href={`/couriers/${c.slug}`}
-          className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition text-center"
-        >
-          {c.name}
-        </Link>
-      ))}
-  </div>
-</section>
-
+      {/* Explore All Couriers */}
+       <ExploreCouriers currentSlug={courier.slug} />
     </main>
   );
 }

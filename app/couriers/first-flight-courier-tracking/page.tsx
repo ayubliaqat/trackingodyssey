@@ -3,11 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import couriersData from "@/app/data/couriers.json";
-
-// 🔹 Static data
+import ExploreCouriers from "@/components/ExploreCouriers";
 const courier = {
   slug: "first-flight-courier-tracking",
   name: "First Flight Courier",
@@ -16,10 +12,9 @@ const courier = {
   address: "G – 1001/02, 10th Floor, Lotus Corporate Park, Off Jay Coach Flyover, Western Express Highway, Goregaon (E), Mumbai – 400 063. INDIA",
   phone_numbers: ["02262686666"],
   emails: ["ffcl@www.firstflight.net"],
-  logo: "", // optional
+  logo: "",
 };
 
-// 🔹 Metadata
 export const metadata: Metadata = {
   title: `${courier.name} Tracking - Real-Time Parcel Updates`,
   description: `Track your shipment with ${courier.name} in Mumbai. Get instant delivery updates for your parcels online.`,
@@ -35,20 +30,6 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-// 🔹 Read all couriers dynamically for "Explore Other Couriers"
-const couriersDir = path.join(process.cwd(), "app", "couriers");
-let otherCouriers: { slug: string; name: string }[] = [];
-
-try {
-  const folders = fs.readdirSync(couriersDir, { withFileTypes: true }).filter((d) => d.isDirectory());
-  otherCouriers = folders
-    .map((d) => ({ slug: d.name, name: d.name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) }))
-    .filter((c) => c.slug !== courier.slug); // exclude current
-} catch (err) {
-  console.error(err);
-}
-
-// 🔹 JSON-LD structured data
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -112,48 +93,27 @@ export default function FirstFlightPage() {
         <table className="min-w-full border border-gray-300 text-sm">
           <tbody>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">City</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">City</th>
               <td className="px-4 py-2">{courier.city}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Address</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">Address</th>
               <td className="px-4 py-2">{courier.address}</td>
             </tr>
             <tr className="border-b">
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Phone Numbers</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">Phone Numbers</th>
               <td className="px-4 py-2 break-words">{courier.phone_numbers.join(", ")}</td>
             </tr>
             <tr>
-              <th scope="row" className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
+              <th className="font-medium px-4 py-2 bg-gray-50 text-left">Emails</th>
               <td className="px-4 py-2 break-words">{courier.emails.join(", ")}</td>
             </tr>
           </tbody>
         </table>
       </section>
 
-   {/* Explore All Couriers */}
-<section aria-labelledby="all-couriers" className="pt-8 border-t border-gray-200">
-  <h2
-    id="all-couriers"
-    className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
-  >
-    Explore All Couriers
-  </h2>
-  <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-    {couriersData
-      .filter((c) => c.slug !== courier.slug) // exclude current courier
-      .map((c) => (
-        <Link
-          key={c.slug}
-          href={`/couriers/${c.slug}`}
-          className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition text-center"
-        >
-          {c.name}
-        </Link>
-      ))}
-  </div>
-</section>
-
+      {/* Explore All Couriers */}
+       <ExploreCouriers currentSlug={courier.slug} />
     </main>
   );
 }

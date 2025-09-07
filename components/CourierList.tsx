@@ -7,6 +7,7 @@ import couriersData from "@/app/data/couriers.json";
 interface Courier {
   name: string;
   slug: string;
+  path: string; // Use path from JSON
 }
 
 export default function CouriersList() {
@@ -54,7 +55,7 @@ export default function CouriersList() {
               <h2 className="text-sm font-semibold mb-3 text-[#1e3d59] break-words">
                 {courier.name}
               </h2>
-              <Link href={`/couriers/${courier.slug}`} aria-label={`Track ${courier.name}`}>
+              <Link href={courier.path} aria-label={`Track ${courier.name}`}>
                 <button
                   className="w-full px-3 py-2 rounded-full text-white text-sm font-medium hover:bg-orange-500 transition-colors"
                   style={{ backgroundColor: "#ff8f26ff" }}

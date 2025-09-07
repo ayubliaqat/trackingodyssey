@@ -3,10 +3,7 @@ import Link from "next/link";
 import TrackForm from "@/components/TrackForm";
 import Script from "next/script";
 import { Metadata } from "next";
-import fs from "fs";
-import path from "path";
-import couriersData from "@/app/data/couriers.json";
-
+import ExploreCouriers from "@/components/ExploreCouriers";
 // 🔹 Static data
 const courier = {
   slug: "nippon-express-tracking",
@@ -35,19 +32,6 @@ export const metadata: Metadata = {
 
 export const revalidate = 60;
 
-// 🔹 Read all couriers dynamically for "Explore Other Couriers"
-const couriersDir = path.join(process.cwd(), "app", "couriers");
-let otherCouriers: { slug: string; name: string }[] = [];
-
-try {
-  const folders = fs.readdirSync(couriersDir, { withFileTypes: true }).filter((d) => d.isDirectory());
-  otherCouriers = folders
-    .map((d) => ({ slug: d.name, name: d.name.replace(/-/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) }))
-    .filter((c) => c.slug !== courier.slug);
-} catch (err) {
-  console.error(err);
-}
-
 // 🔹 JSON-LD structured data
 const structuredData = {
   "@context": "https://schema.org",
@@ -69,6 +53,7 @@ const structuredData = {
 export default function NipponExpressPage() {
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
+      {/* JSON-LD */}
       <Script id="json-ld" type="application/ld+json">
         {JSON.stringify(structuredData)}
       </Script>
@@ -99,11 +84,9 @@ export default function NipponExpressPage() {
         )}
         <p className="text-gray-700">
           <strong>Check Also: </strong>
-          <span className="mr-2">
-            <Link href="/couriers/star-door-to-door-tracking" className="text-blue-600 underline">
-              Star Door To Door Courier
-            </Link>
-          </span>
+          <Link href="/couriers/star-door-to-door-tracking" className="text-blue-600 underline">
+            Star Door To Door Courier
+          </Link>
         </p>
       </section>
 
@@ -132,29 +115,8 @@ export default function NipponExpressPage() {
         </table>
       </section>
 
-   {/* Explore All Couriers */}
-<section aria-labelledby="all-couriers" className="pt-8 border-t border-gray-200">
-  <h2
-    id="all-couriers"
-    className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
-  >
-    Explore All Couriers
-  </h2>
-  <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-    {couriersData
-      .filter((c) => c.slug !== courier.slug) // exclude current courier
-      .map((c) => (
-        <Link
-          key={c.slug}
-          href={`/couriers/${c.slug}`}
-          className="px-3 py-1 bg-gray-100 rounded-full text-sm hover:bg-gray-200 transition text-center"
-        >
-          {c.name}
-        </Link>
-      ))}
-  </div>
-</section>
-
+      {/* Explore All Couriers */}
+      <ExploreCouriers currentSlug={courier.slug} />
     </main>
   );
 }
