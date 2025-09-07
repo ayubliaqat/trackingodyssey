@@ -10,7 +10,7 @@ type PageProps = {
   searchParams?: Promise<{ number?: string }>;
 };
 
-// 🔹 Metadata generation
+// 🔹 Metadata generation (noindex)
 export async function generateMetadata({
   params,
 }: {
@@ -25,7 +25,7 @@ export async function generateMetadata({
   return {
     title: `Tracking Results - ${courier.name}`,
     description: `Check tracking results for your courier.`,
-    robots: { index: false, follow: true },
+    robots: { index: false, follow: true }, // noindex
   };
 }
 
@@ -95,8 +95,9 @@ export default async function TrackingResultPage({
       </section>
 
       <div className="text-center mt-8">
+        {/* Go Back to the static courier page in root app folder */}
         <Link
-          href={`/couriers/${slug}`}
+          href={`/${slug}`} // root static page
           className="inline-block px-6 py-3 bg-orange-400 text-white font-semibold rounded-full hover:bg-orange-500 transition"
         >
           ← Go Back to {courier.name}
