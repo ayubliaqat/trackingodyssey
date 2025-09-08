@@ -124,7 +124,7 @@
     "id": 21,
     "name": "Falcon Bus Online",
     "slug": "falcon-bus-tracking",
-    "path": "/couriers/alcon-bus-tracking"
+    "path": "/couriers/falcon-bus-tracking"
   },
   {
     "id": 22,
@@ -424,7 +424,7 @@
   },
   {
     "id": 70,
-    "name": "Garuda Indonesia Cargo",
+    "name": "Garu Indonesia Cargo",
     "slug": "garuda-indonesia-cargo",
     "website": "https://cargo.garuda-indonesia.com/",
     "path": "/garuda-indonesia-cargo"

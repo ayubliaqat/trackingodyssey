@@ -1,4 +1,4 @@
-// Example: app/couriers/example-courier/page.tsx
+// app/couriers/garuda-indonesia-cargo/page.tsx
 import Link from "next/link";
 import TrackFormApp from "@/components/SimpleTrackForm";
 import Script from "next/script";
@@ -7,13 +7,13 @@ import ExploreCouriers from "@/components/ExploreCouriers";
 
 // 🔹 Static courier data
 const courier = {
-  slug: "example-courier",
-  name: "Example Courier",
-  website: "https://www.example.com/",
-  city: "City Name",
-  address: "Address line here",
-  phone_numbers: ["+123 456 7890"],
-  emails: ["info@example.com"],
+  slug: "garuda-indonesia-cargo",
+  name: "Garuda Indonesia Cargo",
+  website: "https://cargo.garuda-indonesia.com/",
+  city: "Tangerang",
+  address: "PT. Garuda Indonesia (Persero) Tbk Service Management Building, Soekarno Hatta International Airport Tangerang 15111, Indonesia. P.O. Box 1004, TNG BUSH Office",
+  phone_numbers: ["+62 804 190 9090"],
+  emails: ["contactcentergarudacgo@garuda-indonesia.com"],
   logo: "",
 };
 
@@ -51,7 +51,7 @@ const structuredData = {
   ],
 };
 
-export default function ExampleCourierPage() {
+export default function GarudaIndonesiaCargoPage() {
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
       {/* JSON-LD */}
@@ -88,8 +88,8 @@ export default function ExampleCourierPage() {
           <p className="text-gray-700">
             <strong>Check Also: </strong>
             <span className="mr-2">
-              <Link href="/previous-courier" className="text-blue-600 underline">
-                Previous Courier Name
+              <Link href="/valmo-courier" className="text-blue-600 underline">
+                Valmo Courier Shipment
               </Link>
             </span>
           </p>

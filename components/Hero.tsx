@@ -5,35 +5,34 @@ import SearchBar from "@/components/SearchBar";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import couriersData from "@/app/data/couriers.json";
 
 export default function Hero() {
   const [query, setQuery] = useState("");
+  const [selectedPath, setSelectedPath] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleSuggestionClick = (slug: string) => {
-    setLoading(true);
-    router.push(`/couriers/${slug}`);
-  };
-
   const handleSearch = () => {
     if (!query.trim()) return;
-
     setLoading(true);
-    import("@/app/data/couriers.json").then((module) => {
-      const data = module.default;
-      const courier = data.find(
-        (c: { name: string; slug: string }) => c.name.toLowerCase() === query.trim().toLowerCase()
+
+    let path = selectedPath;
+
+    if (!path) {
+      const courier = couriersData.find(
+        (c) => c.name.toLowerCase() === query.trim().toLowerCase()
       );
+      if (courier) path = courier.path;
+    }
 
-      setLoading(false);
+    setLoading(false);
 
-      if (courier) {
-        router.push(`/couriers/${courier.slug}`);
-      } else {
-        alert("Courier not found.");
-      }
-    });
+    if (path) {
+      router.push(path);
+    } else {
+      alert("Courier not found.");
+    }
   };
 
   return (
@@ -50,7 +49,7 @@ export default function Hero() {
           </p>
 
           <div className="bg-white dark:bg-gray-800 shadow-lg p-6 rounded-2xl w-full max-w-xl mx-auto md:mx-0">
-            <SearchBar query={query} setQuery={setQuery} onSuggestionClick={handleSuggestionClick} />
+            <SearchBar query={query} setQuery={setQuery} setSelectedPath={setSelectedPath} />
 
             <div className="flex flex-col sm:flex-row gap-4 mt-4">
               <button
