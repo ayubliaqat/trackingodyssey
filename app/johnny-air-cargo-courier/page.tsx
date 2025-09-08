@@ -1,31 +1,30 @@
-// app/couriers/baraka-express-tracking/page.tsx
+// app/johnny-air-cargo-courier/page.tsx
 import Link from "next/link";
 import TrackFormApp from "@/components/SimpleTrackForm";
 import Script from "next/script";
 import ExploreCouriers from "@/components/ExploreCouriers";
 import { Metadata } from "next";
-import couriersData from "@/app/data/couriers.json";
 
 // 🔹 Static courier data
 const courier = {
-  slug: "baraka-express-indonesia",
-  name: "Baraka Express Order Shipment",
-  website: "https://barakaexpress.co.id/",
-  city: "Jakarta Timur",
-  address: "Jalan Raya Setu Gg. Sejahtera RT005/001 Cipayung, Jakarta Timur",
-  phone_numbers: ["+6281313724646", "021-84906644"],
-  emails: ["customercare@baraka-express.com"],
+  slug: "johnny-air-cargo-courier",
+  name: "Johnny Air Cargo Order Shipment",
+  website: "https://johnnyaircargotracking.com/",
+  city: "Makati",
+  address: "CJV Bldg. 108 Aguirre St., Legaspi Village, Makati",
+  phone_numbers: ["718-672-7080"],
+  emails: [],
   logo: "",
 };
 
 // 🔹 Metadata
 export const metadata: Metadata = {
   title: `${courier.name} Tracking - Real-Time Parcel Updates`,
-  description: `Track your shipment with ${courier.name} in Jakarta Timur. Get instant delivery updates for your parcels online.`,
+  description: `Track your shipment with ${courier.name} in Makati. Get instant delivery updates for your parcels online.`,
   alternates: { canonical: `https://trackingodyssey.com/${courier.slug}` },
   openGraph: {
     title: `${courier.name} Tracking`,
-    description: `Check your parcel status online with ${courier.name} in Jakarta Timur, Indonesia.`,
+    description: `Check your parcel status online with ${courier.name} in Makati, Philippines.`,
     url: `https://trackingodyssey.com/${courier.slug}`,
     siteName: "Tracking Odyssey",
     type: "website",
@@ -33,9 +32,6 @@ export const metadata: Metadata = {
 };
 
 export const revalidate = 60;
-
-// 🔹 Get all other couriers from JSON excluding current
-const otherCouriers = couriersData.filter((c) => c.slug !== courier.slug);
 
 // 🔹 JSON-LD structured data
 const structuredData = {
@@ -55,7 +51,7 @@ const structuredData = {
   ],
 };
 
-export default function BarakaExpressPage() {
+export default function JohnnyAirCargoCourierPage() {
   return (
     <main className="px-4 sm:px-6 py-10 bg-white min-h-screen max-w-5xl mx-auto">
       {/* JSON-LD */}
@@ -81,36 +77,35 @@ export default function BarakaExpressPage() {
         <TrackFormApp slug={courier.slug} />
       </section>
 
-      {/* Official Website & Check Also */}
-      {courier.website && (
-        <section
-          className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base"
-          aria-label="Courier links"
-        >
-          <p className="mb-2 text-gray-700 break-words">
-            <strong>Visit Official Website: </strong>
-            <a
-              href={courier.website}
-              target="_blank"
-              rel="noopener noreferrer"
+      {/* Official Website + Check Also */}
+      <section
+        className="bg-gray-100 rounded-lg p-4 mb-10 text-sm sm:text-base"
+        aria-label="Courier links"
+      >
+        <p className="mb-2 text-gray-700 break-words">
+          <strong>Visit Official Website: </strong>
+          <a
+            href={courier.website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 underline"
+          >
+            {courier.website}
+          </a>
+        </p>
+
+        <p className="text-gray-700">
+          <strong>Check Also: </strong>
+          <span className="mr-2">
+            <Link
+              href="/pickdel-express"
               className="text-blue-600 underline"
             >
-              {courier.website}
-            </a>
-          </p>
-
-          {/* Check Also Section using otherCouriers */}
-         <p className="text-gray-700">
-  <strong>Check Also: </strong>
-  <span className="mr-2">
-    <Link href="/sinokor-container" className="text-blue-600 underline">
-      Sinokor Courier Delivery
-    </Link>
-  </span>
-</p>
-
-        </section>
-      )}
+              Pickdel Express Cargo
+            </Link>
+          </span>
+        </p>
+      </section>
 
       {/* Contact Table */}
       <section aria-labelledby="contact-info" className="mb-12 overflow-x-auto">

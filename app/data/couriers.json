@@ -148,7 +148,7 @@
     "id": 25,
     "name": "Neelgiri Courier Delivery",
     "slug": "neelgiri-tracking",
-    "path": "/couriers/Neelgiri Courier Delivery"
+    "path": "/couriers/neelgiri-tracking"
   },
   {
     "id": 26,
@@ -512,5 +512,132 @@
     "slug": "japan-post-office",
     "website": "https://www.post.japanpost.jp/index_en.html",
     "path": "/japan-post-office"
-  }
+  },
+  {
+    "id": 83,
+    "name": "EDI Express Courier Shipment",
+    "slug": "edi-express-courier",
+    "website": "https://www.post.japanpost.jp/index_en.html",
+    "path": "/edi-express-courier"
+  },
+  {
+    "id": 84,
+    "name": "Doora Logistics Courier",
+    "slug": "doora-logistics-courier",
+    "website": "https://www.post.japanpost.jp/index_en.html",
+    "path": "/doora-logistics-courier"
+  },
+  {
+  "id": 85,
+  "name": "Postnord Parcel Shipment",
+  "slug": "postnord-portal-business",
+  "website": "https://www.postnord.se/en/",
+  "path": "/postnord-portal-business"
+},
+{
+  "id": 86,
+  "name": "BLPL Courier Delivery",
+  "slug": "blpl-singapore-courier",
+  "website": "https://www.tgsblpl.com/index.html",
+  "path": "/blpl-singapore-courier"
+},
+{
+  "id": 87,
+  "name": "Dohrn Order Delivery",
+  "slug": "dohrn-transfer-company",
+  "website": "https://www.dohrn.com/",
+  "path": "/dohrn-transfer-company"
+},
+{
+  "id": 88,
+  "name": "NPCT1 Courier Delivery",
+  "slug": "npct1-courier-indonesia",
+  "website": "https://www.npct1.co.id/",
+  "path": "/npct1-courier-indonesia"
+},
+{
+  "id": 89,
+  "name": "Deppon Express Logistics shipment",
+  "slug": "deppon-express-logistics",
+  "website": "https://www.deppon.com/",
+  "path": "/deppon-express-logistics"
+},
+{
+  "id": 90,
+  "name": "Alice Blue Online Shipment Deliver",
+  "slug": "alice-blue-online-courier",
+  "website": "https://aliceblueonline.com/",
+  "path": "/couriers/alice-blue-online-courier"
+},
+{
+  "id": 91,
+  "name": "Roadrunner Freight Courier Delivery",
+  "slug": "roadrunner-tracking",
+  "website": "https://freight.rrts.com/",
+  "path": "/roadrunner-tracking"
+},
+{
+  "id": 92,
+  "name": "Pickdel Express Cargo",
+  "slug": "pickdel-express",
+  "website": "https://pickdel.in/",
+  "path": "/pickdel-express"
+},
+{
+  "id": 93,
+  "name": "Johnny Air Cargo Courier",
+  "slug": "johnny-air-cargo-courier",
+  "website": "https://johnnyaircargotracking.com/",
+  "path": "/johnny-air-cargo-courier"
+},
+{
+  "id": 94,
+  "name": "ABK Logistics Delivery Status",
+  "slug": "abk-logistics-courier",
+  "website": "https://abklogistics.com/",
+  "path": "/abk-logistics-courier"
+},
+{
+  "id": 95,
+  "name": "Leopards Express Courier Delivery",
+  "slug": "leopards-china-express",
+  "website": "http://www.leopardschina.com/",
+  "path": "/leopards-china-express"
+},
+{
+  "id": 96,
+  "name": "TCCS Parcel Delivery",
+  "slug": "tccs-logistics",
+  "website": "https://www.tccs.in/",
+  "path": "/tccs-logistics"
+},
+{
+  "id": 97,
+  "name": "Pandu Logistics Delivery Status",
+  "slug": "pandu-logistics-courier",
+  "website": "https://pandulogistics.com/",
+  "path": "/pandu-logistics-courier"
+},
+{
+  "id": 98,
+  "name": "ACS Transport Order Shipment",
+  "slug": "acs-courier-transport",
+  "website": "https://www.acscourier.net/",
+  "path": "/acs-courier-transport"
+},
+{
+  "id": 99,
+  "name": "Qxpress Order Delivery",
+  "slug": "qxpress-order-delivery",
+  "website": "https://www.qxpress.net/",
+  "path": "/qxpress-order-delivery"
+},
+{
+  "id": 100,
+  "name": "Xendnow Courier Delivery Status",
+  "slug": "xendnow-courier",
+  "website": "https://www.xendnow.my/",
+  "path": "/xendnow-courier"
+}
+
 ]

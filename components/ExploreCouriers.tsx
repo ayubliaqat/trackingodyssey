@@ -22,7 +22,7 @@ export default function ExploreCouriers({ currentSlug }: ExploreCouriersProps) {
         id="all-couriers"
         className="text-lg sm:text-xl font-semibold mb-4 text-[#1e3d59] text-center"
       >
-        Explore All Couriers
+        All Related Couriers....!
       </h2>
       <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
         {otherCouriers.map((c) => (
